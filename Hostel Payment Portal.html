@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)http://127.0.0.1:3000/pay.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" src="./Hostel Payment Portal_files/___vscode_livepreview_injected_script"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Payment Portal</title>
+    <link rel="stylesheet" href="./Hostel Payment Portal_files/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .qr-code {
+            margin-top: 10px;
+            width: 100%;
+            max-width: 220px;
+            height: auto;
+        }
+        .payment-logos {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .payment-logos img {
+            width: 50px;
+            height: auto;
+        }
+        h2, h3 {
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hostel Payment Portal</h2>
+        <div id="dashboard">
+            
+            <button onclick="openPaymentForm()">Pay Now</button>
+        </div>
+        
+        <div id="payment-form" class="hidden">
+            <h3>Make Payment</h3>
+            
+            <label for="year">Select Year:</label>
+            <select id="year" onchange="updateOptions()">
+                <option value="1st">1st Year</option>
+                <option value="2nd">2nd Year</option>
+                <option value="3rd">3rd Year</option>
+                <option value="4th">4th Year</option>
+            </select>
+            
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name" required="">
+            
+            <label for="roll">Roll Number:</label>
+            <input type="text" id="roll" placeholder="Enter your roll number" required="">
+            
+            <label for="branch">Branch:</label>
+            <input type="text" id="branch" placeholder="Enter your branch" required="">
+            
+            <label for="amount">Enter Amount:</label>
+            <input type="number" id="amount" placeholder="Enter amount to pay" required="">
+            
+            <label for="method">Payment Method:</label>
+            <select id="method" onchange="toggleQRCode()">
+                <option value="upi">UPI</option>
+                <option value="sbi_netbanking">SBI Net Banking</option>
+                <option value="other_netbanking">Other Bank Net Banking</option>
+                <option value="card">Credit/Debit Card</option>
+            </select>
+            
+            <div class="payment-logos">
+               
+            </div>
+            
+            <div id="qr-section">
+                <p>Scan the QR code to complete your payment:</p>
+                <img class="\HTML\hh.jpg"alt="SBI Payment QR Code">
+                <img class="C:\xampp\htdocs\HTML\WhatsApp Image 2025-04-07 at 09.24.19_71d8d4c7.jpg" alt="SBI Payment QR Code">
+            </div>
+            
+            <button onclick="processPayment()">Proceed to Pay</button>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('dues').innerText = Math.floor(Math.random() * 10000) + 1000;
+        
+        function openPaymentForm() {
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('payment-form').classList.remove('hidden');
+        }
+
+        function processPayment() {
+            const year = document.getElementById('year').value;
+            const name = document.getElementById('name').value;
+            const roll = document.getElementById('roll').value;
+            const branch = document.getElementById('branch').value;
+            const amount = document.getElementById('amount').value;
+            
+            if (!year || !name || !roll || !branch || !amount || amount <= 0) {
+                alert("Please enter valid details and amount before proceeding.");
+                return;
+            }
+            
+            document.body.innerHTML = `<div class='container'>
+                <h2>Payment Receipt</h2>
+                <p><strong>Year:</strong> ${year}</p>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Roll Number:</strong> ${roll}</p>
+                <p><strong>Branch:</strong> ${branch}</p>
+                <p><strong>Amount Paid:</strong> ₹${amount}</p>
+                <p><strong>Status:</strong> Payment Successful</p>
+                <button onclick='window.print()'>Print Receipt</button>
+            </div>`;
+        }
+    </script>
+
+
+</body></html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eef1f7;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #004aad;
+            margin-bottom: 20px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #004aad;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            transition: background 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #002f6c;
+            border-radius: 5px;
+        }
+
+        .content-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            color: #333;
+            border-bottom: 2px solid #004aad;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #004aad;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #002f6c;
+        }
+
+table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .form-input {
+            margin-bottom: 10px;
+            display: block;
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        
+        .feedback-list, .complaint-list {
+            margin-top: 20px;
+        }
+
+        .feedback-item, .complaint-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .star-rating {
+            color: #f39c12;
+            font-size: 18px;
+        }
+
+        .delete-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        .form-input {
+            margin-bottom: 10px;
+            display: block;
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+.food-menu-list {
+            margin-top: 20px;
+        }
+
+        .food-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+           </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <h1>Admin Dashboard</h1>
+
+  <nav class="navbar">
+        <a href="#" onclick="showSection('manageWardens')">Manage Wardens</a>
+        <a href="#" onclick="showSection('feedback')">Feedback</a>
+        <a href="#" onclick="showSection('foodMenu')">Food Menu</a>
+        <a href="#" onclick="showSection('complaints')">Complaints</a>
+        <a href="#" onclick="showSection('notices')">Notices</a>
+        <a href="warreg.html" class="button">Warden Registration</a>
+        <a href="adreg.html" class="button">Admin Registration</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </nav>
+ <!-- Food Menu Section -->
+<div class="content-section" id="foodMenu-section">
+    <h2 class="section-title">Manage Food Menu</h2>
+    <form id="addFoodItemForm" onsubmit="addFoodItem(event)">
+        <input type="text" id="foodItemName" class="form-input" placeholder="Food Item Name" required />
+        <select id="foodDay" class="form-input" required>
+            <option value="">Select Day</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+        </select>
+        <select id="foodCategory" class="form-input" required>
+            <option value="">Select Category</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+        </select>
+        <select id="foodMenuType" class="form-input" required>
+            <option value="">Select Menu Type</option>
+            <option value="Men">Men's Menu</option>
+            <option value="Women">Women's Menu</option>
+        </select>
+        <button type="submit">Add Food Item</button>
+    </form>
+
+    <h3>Food Menu List</h3>
+    <div id="foodMenuList"></div>
+</div>
+
+<script>
+    function addFoodItem(event) {
+        event.preventDefault();
+
+        const itemName = document.getElementById('foodItemName').value;
+        const day = document.getElementById('foodDay').value;
+        const category = document.getElementById('foodCategory').value;
+        const menuType = document.getElementById('foodMenuType').value;
+
+        if (!itemName || !day || !category || !menuType) {
+            alert("Please fill in all fields.");
+            return;
+        }
+
+        let foodMenu = JSON.parse(localStorage.getItem('foodMenu')) || [];
+        const newItem = { id: Date.now(), name: itemName, day, category, menuType };
+
+        foodMenu.push(newItem);
+        localStorage.setItem('foodMenu', JSON.stringify(foodMenu));
+        displayFoodMenu();
+        updateHostelFoodMenu();
+    }
+
+    function displayFoodMenu() {
+        const foodMenuList = document.getElementById('foodMenuList');
+        foodMenuList.innerHTML = "";
+
+        let foodMenu = JSON.parse(localStorage.getItem('foodMenu')) || [];
+
+        if (foodMenu.length === 0) {
+            foodMenuList.innerHTML = "<p>No items added yet.</p>";
+        } else {
+            foodMenu.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('food-item');
+                itemElement.innerHTML = `
+                    <p><strong>${item.day} - ${item.category} (${item.menuType} Menu):</strong> ${item.name}</p>
+                    <button onclick="deleteFoodItem(${item.id})" style="background-color: red; color: white;">Delete</button>
+                `;
+                foodMenuList.appendChild(itemElement);
+            });
+        }
+    }
+
+    function deleteFoodItem(itemId) {
+        let foodMenu = JSON.parse(localStorage.getItem('foodMenu')) || [];
+        foodMenu = foodMenu.filter(item => item.id !== itemId);
+        localStorage.setItem('foodMenu', JSON.stringify(foodMenu));
+        displayFoodMenu();
+        updateHostelFoodMenu();
+    }
+
+    function updateHostelFoodMenu() {
+        localStorage.setItem('foodMenuUpdated', 'true');
+    }
+
+    document.addEventListener("DOMContentLoaded", displayFoodMenu);
+</script>
+
+<!-- Manage Wardens Section -->
+    <div class="content-section active" id="manageWardens-section">
+        <h2 class="section-title">Manage Wardens</h2>
+
+        <!-- Add Staff Form -->
+        <form id="addStaffForm" onsubmit="addStaff(event)">
+            <input type="text" id="staffName" class="form-input" placeholder="Name" required />
+            <input type="text" id="staffRole" class="form-input" placeholder="Role" required />
+            <input type="tel" id="staffPhone" class="form-input" placeholder="Phone No." required />
+            <select id="staffHostel" class="form-input" required>
+                <option value="">Select Hostel</option>
+                <option value="Elite">Elite</option>
+                <option value="Nalandha">Nalandha</option>
+                <option value="Maharaj">Maharaj</option>
+                <option value="Saraswathi Nivas">Saraswathi Nivas</option>
+                <option value="Bhagirathi Bhavan">Bhagirathi Bhavan</option>
+            </select>
+            <button type="submit">Add Staff</button>
+        </form>
+
+        <!-- Staff List Table -->
+        <h3>Current Staff:</h3>
+        <table id="staffTable">
+            <thead>
+                <tr>
+                                        <th>Name</th>
+                    <th>Role</th>
+                    <th>Phone No</th>
+                    <th>Hostel</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="staffList"></tbody>
+        </table>
+
+        <!-- Delete Staff -->
+        <input type="text" id="deleteStaffName" class="form-input" placeholder="Enter Name to Delete">
+        <button onclick="deleteStaff()">Delete Staff</button>
+        
+    </div>
+</div>
+
+<script>
+    // Existing sample staff data
+    let sampleStaff = JSON.parse(localStorage.getItem("staffData")) || [
+        { name: "Dr.G.Mohan", role: "Office Incharge", phone: "9876545321", hostel: "Elite" },
+        { name: "S.Krishna", role: "Deputy Warden for Elite", phone: "8764441333", hostel: "Elite" },
+        { name: "Smt.S.Apsarasa", role: "Deputy Warden for Saraswathi Nivas", phone: "5676324333", hostel: "Saraswathi Nivas" },
+        { name: "Smt.C.Kalavathi", role: "Deputy Warden for Bhagirathi Bhavan", phone: "5599384923", hostel: "Bhagirathi Bhavan" },
+        { name: "Sri.N.Sekhar", role: "Deputy Warden for Nalandha", phone: "9994446333", hostel: "Nalandha" },
+        { name: "Sri.S.BASHA", role: "Deputy Warden for Maharaj", phone: "9986451333", hostel: "Maharaj" },
+        { name: "Sri.C.CHANDRA REDDY", role: "Deputy Warden for Nalandha", phone: "9948384333", hostel: "Nalandha" }
+    ];
+
+    function renderStaffList() {
+        const staffList = document.getElementById("staffList");
+        staffList.innerHTML = "";
+        sampleStaff.forEach((staff, index) => {
+            staffList.innerHTML += `
+                <tr>
+                    <td>${staff.name}</td>
+                    <td>${staff.role}</td>
+                    <td>${staff.phone}</td>
+                    <td>${staff.hostel}</td>
+                    <td>
+                        <button onclick="modifyStaff(${index})">Modify</button>
+                    </td>
+                </tr>
+            `;
+        });
+        localStorage.setItem("staffData", JSON.stringify(sampleStaff));
+    }
+
+    function addStaff(event) {
+        event.preventDefault();
+        const name = document.getElementById("staffName").value;
+        const role = document.getElementById("staffRole").value;
+        const phone = document.getElementById("staffPhone").value;
+        const hostel = document.getElementById("staffHostel").value;
+
+        sampleStaff.push({ name, role, phone, hostel });
+        renderStaffList();
+        document.getElementById("addStaffForm").reset();
+    }
+
+    function modifyStaff(index) {
+        const newName = prompt("Enter new name:", sampleStaff[index].name);
+        const newRole = prompt("Enter new role:", sampleStaff[index].role);
+        if (newName !== null && newRole !== null) {
+            sampleStaff[index].name = newName;
+            sampleStaff[index].role = newRole;
+            renderStaffList();
+        }
+    }
+
+    function deleteStaff() {
+        const name = document.getElementById("deleteStaffName").value;
+        const initialLength = sampleStaff.length;
+        sampleStaff = sampleStaff.filter(staff => staff.name !== name);
+
+        if (sampleStaff.length < initialLength) {
+            alert(`${name} has been deleted.`);
+        } else {
+            alert(`${name} not found.`);
+        }
+
+        renderStaffList();
+        document.getElementById("deleteStaffName").value = "";
+    }
+
+    // Initial render
+    renderStaffList();
+</script>
+
+
+    <!-- Feedback Section -->
+    <div class="content-section" id="feedback-section">
+        <h2 class="section-title">Student Feedback</h2>
+        <div id="feedback-list" class="feedback-list"></div>
+    </div>
+
+    <!-- Complaints Section -->
+    <div class="content-section" id="complaints-section">
+        <h2 class="section-title">Student Complaints</h2>
+        <div id="complaint-list" class="complaint-list"></div>
+    </div>
+
+    <!-- Notices Section -->
+    <div class="content-section" id="notices-section">
+        <h2 class="section-title">Notices</h2>
+        <input type="text" id="notice-text" placeholder="Enter new notice" class="form-input">
+        <button onclick="postNotice()">Post Notice</button>
+        <div id="notice-list"></div>
+    </div>
+</div>
+
+<script>
+    function showSection(section) {
+        if (section === 'feedback') {
+            loadFeedback();
+        } else if (section === 'complaints') {
+            loadComplaints();
+        }
+        
+        document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+        document.getElementById(`${section}-section`).classList.add('active');
+    }
+
+    function loadFeedback() {
+        const feedbackList = document.getElementById('feedback-list');
+        feedbackList.innerHTML = "";
+
+        let feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+
+        if (feedbacks.length === 0) {
+            feedbackList.innerHTML = "<p>No feedback submitted yet.</p>";
+        } else {
+            feedbacks.forEach((feedback, index) => {
+                feedbackList.innerHTML += `
+                    <div class="feedback-item">
+                        <p><strong>Category:</strong> ${feedback.category}</p>
+                        <p><strong>Comments:</strong> ${feedback.comments}</p>
+                        <p><strong>Rating:</strong> <span class="star-rating">${'⭐'.repeat(feedback.rating)}</span></p>
+                        <p><strong>Submitted on:</strong> ${feedback.timestamp}</p>
+                        <button class="delete-btn" onclick="deleteFeedback(${index})">Delete</button>
+                    </div>
+                `;
+            });
+        }
+    }
+
+    function deleteFeedback(index) {
+        let feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+        feedbacks.splice(index, 1);
+        localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+        loadFeedback();
+    }
+
+    function loadComplaints() {
+        const complaintList = document.getElementById('complaint-list');
+        complaintList.innerHTML = "";
+
+        let complaints = JSON.parse(localStorage.getItem('complaints')) || [];
+
+        if (complaints.length === 0) {
+            complaintList.innerHTML = "<p>No complaints submitted yet.</p>";
+        } else {
+            complaints.forEach((complaint, index) => {
+                complaintList.innerHTML += `
+                    <div class="complaint-item">
+                        <p><strong>Category:</strong> ${complaint.category}</p>
+                        <p><strong>Complaint:</strong> ${complaint.complaintText}</p>
+                        <p><strong>Submitted on:</strong> ${complaint.date}</p>
+                        <button class="delete-btn" onclick="deleteComplaint(${index})">Delete</button>
+                    </div>
+                `;
+            });
+        }
+    }
+
+    function deleteComplaint(index) {
+        let complaints = JSON.parse(localStorage.getItem('complaints')) || [];
+        complaints.splice(index, 1);
+        localStorage.setItem('complaints', JSON.stringify(complaints));
+        loadComplaints();
+    }
+
+    function logout() {
+        window.location.href = 'home1.html';
+    }
+ // Function to post notices
+    function postNotice() {
+        const noticeText = document.getElementById('notice-text').value;
+        if (noticeText.trim() === "") {
+            alert("Notice cannot be empty!");
+            return;
+        }
+
+        const noticeId = Date.now();
+        const noticeHtml = document.createElement('div');
+        noticeHtml.id = `notice-${noticeId}`;
+        noticeHtml.style.display = 'flex';
+        noticeHtml.style.justifyContent = 'space-between';
+        noticeHtml.style.alignItems = 'center';
+        noticeHtml.style.margin = '5px 0';
+
+        noticeHtml.innerHTML = `
+            <span>${noticeText}</span>
+            <button onclick="deleteNotice(${noticeId})" style="background-color: #ff4d4d; color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer;">Delete</button>
+        `;
+
+        document.getElementById('notice-list').appendChild(noticeHtml);
+        document.getElementById('notice-text').value = "";
+    }
+
+    // Function to delete notices
+    function deleteNotice(noticeId) {
+        const noticeElement = document.getElementById(`notice-${noticeId}`);
+        if (noticeElement) {
+            noticeElement.remove();
+        }
+    }
+
+   
+</script>
+
+</body>
+</html>

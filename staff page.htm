@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Staff Information</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <h1>Hostel Staff Information</h1>
+        <p>Meet our dedicated staff who ensure everything runs smoothly!</p>
+    </header>
+<style>
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+header p {
+    font-style: italic;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+}
+
+/* Staff Member Container */
+.staff-member {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Staff Details */
+.staff-details {
+    max-width: 500px;
+}
+
+.staff-member h2 {
+    color: #4CAF50;
+    font-size: 1.6rem;
+}
+
+.staff-member p {
+    margin: 10px 0;
+}
+
+.staff-member strong {
+    color: #333;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    margin-top: 30px;
+}
+
+footer p {
+    font-size: 1rem;
+}
+
+</style>
+
+    <main>
+       
+        <section class="staff-member">
+           
+            <div class="staff-details">
+                <h2>Dr.G.Mohan</h2>
+                <p><strong>Role:</strong> office incharge</p>
+                <p><strong>Phone:</strong> 9876545321</p>
+            </div>
+        </section>
+
+        <section class="staff-member">
+                                       <div class="staff-details">
+                <h2>S.krishna</h2>
+                <p><strong>Role:</strong> deputy warden for elite</p>
+                <p><strong>Phone:</strong> 8764441333</p>
+            </div>
+        </section>
+        
+        <section class="staff-member">
+                       <div class="staff-details">
+                <h2>Smt.S.Apsarasa</h2>
+                <p><strong>Role:</strong> deputy warden for saraswati nivas</p>
+                <p><strong>Phone:</strong> 5676324333</p>
+            </div>
+        </section>
+        
+        <section class="staff-member">
+                        <div class="staff-details">
+                <h2>Smt.C.kalavathi</h2>
+                <p><strong>Role:</strong> deputy warden for bhagiratha bhavan</p>
+                <p><strong>Phone:</strong> 5599384923</p>
+            </div>
+        </section>
+        
+        <section class="staff-member">
+                        <div class="staff-details">
+                <h2>Sri.N.sekhar</h2>
+                <p><strong>Role:</strong> deputy warden nalandha</p>
+                <p><strong>Phone:</strong> 9994446333</p>
+            </div>
+        </section>
+        
+        <section class="staff-member">
+                      <div class="staff-details">
+                <h2>Sri.S.BASHA</h2>
+                <p><strong>Role:</strong> deputy warden for maharaj</p>
+                <p><strong>Phone:</strong> 9986451333</p>
+            </div>
+        </section>
+        
+        <section class="staff-member">
+                       <div class="staff-details">
+                <h2>Sri.C.CHANDRA REDDY</h2>
+                <p><strong>Role:</strong> deputy warden for nalandha</p>
+                <p><strong>Phone:</strong> 9948384333</p>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Hostel Management</p>
+    </footer>
+    <script>
+        function loadStaffDetails() {
+            const staffData = JSON.parse(localStorage.getItem("staffData")) || [];
+            const staffContainer = document.querySelector("main");
+            staffContainer.innerHTML = ""; // Clear existing content
+    
+            staffData.forEach(staff => {
+                staffContainer.innerHTML += `
+                    <section class="staff-member">
+                                                <div class="staff-details">
+                            <h2>${staff.name}</h2>
+                            <p><strong>Role:</strong> ${staff.role}</p>
+                            <p><strong>Phone:</strong> ${staff.phone}</p>
+                        </div>
+                    </section>
+                `;
+            });
+        }
+    
+        window.onload = loadStaffDetails;
+    </script>
+    
+
+</body>
+</html>

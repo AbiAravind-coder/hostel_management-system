@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hostel Feedback Form & Admin Dashboard</title>
+    <style>
+        /* Basic Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #555;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        select, textarea, button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .star-rating {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .star {
+            font-size: 32px;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star:hover,
+        .star.active {
+            color: #f39c12;
+        }
+
+        .feedback-text {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            padding: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Admin Dashboard Styles */
+        .admin-dashboard {
+            padding: 30px;
+            background-color: #fff;
+            width: 100%;
+            max-width: 900px;
+            margin: 50px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .complaint-list {
+            margin-top: 20px;
+        }
+
+        .complaint-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .complaint-item p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Feedback Form Section -->
+<div class="container">
+    <h2>Hostel Feedback Form</h2>
+    
+    <label for="category">Select Category:</label>
+    <select id="category" required>
+        <option value="" disabled selected>Select a category</option>
+        <option value="Food">Food</option>
+        <option value="Cleanliness">Cleanliness</option>
+        <option value="Facilities">Facilities</option>
+        <option value="Hostel Staff">Hostel Staff</option>
+    </select>
+
+    <label for="comments">Your Opinion:</label>
+    <textarea id="comments" placeholder="Write your feedback here..." required></textarea>
+
+    <label>Rate the Experience:</label>
+    <div class="star-rating" id="starRating">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <div class="feedback-text" id="feedbackText"></div>
+
+    <button type="submit" onclick="submitFeedback()">Submit Feedback</button>
+</div>
+
+<!-- Admin Dashboard Section -->
+<div class="admin-dashboard">
+    <h2 class="section-title">Student Feedback</h2>
+    <div class="complaint-list" id="feedback-list">
+        <!-- Feedbacks will be dynamically displayed here -->
+    </div>
+</div>
+
+<script>
+    // Feedback Form JavaScript
+    const stars = document.querySelectorAll('.star');
+    const feedbackText = document.getElementById('feedbackText');
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const value = parseInt(star.getAttribute('data-value'));
+            setRating(value);
+        });
+    });
+
+    function setRating(value) {
+        stars.forEach(star => {
+            const starValue = parseInt(star.getAttribute('data-value'));
+            if (starValue <= value) {
+                star.classList.add('active');
+            } else {
+                star.classList.remove('active');
+            }
+        });
+
+        switch (value) {
+            case 1:
+                feedbackText.textContent = 'Worst';
+                feedbackText.style.color = '#e74c3c';
+                break;
+            case 2:
+                feedbackText.textContent = 'Bad';
+                feedbackText.style.color = '#e67e22';
+                break;
+            case 3:
+                feedbackText.textContent = 'Better';
+                feedbackText.style.color = '#f1c40f';
+                break;
+            case 4:
+                feedbackText.textContent = 'Good';
+                feedbackText.style.color = '#2ecc71';
+                break;
+            case 5:
+                feedbackText.textContent = 'Excellent';
+                feedbackText.style.color = '#27ae60';
+                break;
+        }
+    }
+
+    function submitFeedback() {
+        const category = document.getElementById('category').value;
+        const comments = document.getElementById('comments').value;
+        const rating = [...stars].filter(star => star.classList.contains('active')).length;
+
+        if (!category || !comments || rating === 0) {
+            alert('Please fill out all fields and provide a rating.');
+            return;
+        }
+
+        const feedback = {
+            category,
+            comments,
+            rating,
+            timestamp: new Date().toLocaleString()
+        };
+
+        // Store feedback in localStorage
+        let feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+        feedbacks.push(feedback);
+        localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+
+        alert(`Feedback Submitted!\nCategory: ${category}\nComments: ${comments}\nRating: ${rating} Stars`);
+
+        // Reset form
+        document.getElementById('category').value = "";
+        document.getElementById('comments').value = "";
+        stars.forEach(star => star.classList.remove('active'));
+        feedbackText.textContent = "";
+
+        showFeedback(); // Update Admin Dashboard Feedback List
+    }
+
+    // Admin Dashboard JavaScript
+    function showFeedback() {
+        const feedbackList = document.getElementById('feedback-list');
+        const feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+
+        if (feedbacks.length === 0) {
+            feedbackList.innerHTML = "<p>No feedback submitted yet.</p>";
+        } else {
+            feedbackList.innerHTML = feedbacks.map(feedback => `
+                <div class="complaint-item">
+                    <p><strong>Category:</strong> ${feedback.category}</p>
+                    <p><strong>Comments:</strong> ${feedback.comments}</p>
+                    <p><strong>Rating:</strong> ${feedback.rating} Stars</p>
+                    <p><strong>Submitted on:</strong> ${feedback.timestamp}</p>
+                </div>
+            `).join('');
+        }
+    }
+
+    // Initially show the feedback in the admin dashboard
+    showFeedback();
+</script>
+
+</body>
+</html>

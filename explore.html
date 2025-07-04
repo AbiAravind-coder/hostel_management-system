@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostels Display</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            max-width: 800px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .card {
+            padding: 20px;
+            width: 50%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s forwards;
+        }
+        .card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+        .card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <img src="https://stage.vit.ac.in/sites/default/files/header_banner/hos.JPG " style="height:240px;" alt="Hostels For Men">
+            <h2>Hostels For Men</h2>
+            <p>There are 3 blocks allotted for Men of capacity varying from 300 to 350 students in each block. The total capacity for Men’s hostel is about 1200.</p>
+            <!-- Explore button with link to a page, for example, 'hostels-for-men.html' -->
+            <a href="hostel book men.html">
+                <button>Explore</button>
+            </a>
+        </div>
+        <div class="card">
+            <img src="https://d23qowwaqkh3fj.cloudfront.net/wp-content/uploads/2022/03/Boys_Hostel-1024x682.png" alt="Hostels For Women">
+            <h2>Hostels For Women</h2>
+            <p>There are 2 blocks allotted for Women students of capacity varying from 300 to 350 in each block. The total capacity for Women’s hostel is about 700.</p>
+            <!-- Explore button with link to a page, for example, 'hostels-for-women.html' -->
+            <a href=".\hostel book women.html">
+                <button>Explore</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Form</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        select:focus, textarea:focus, button:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Success Message */
+        #successMessage {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="successMessage">
+            <p>Your complaint has been successfully submitted. Thank you for your feedback!</p>
+        </div>
+
+        <h1>Complaint Form</h1>
+        
+        <form id="complaintForm">
+            <label for="category">Select Complaint Category:</label>
+            <select id="category" name="category" required>
+                <option value="">--Please choose an option--</option>
+                <option value="Facilities">Facilities</option>
+                <option value="Cleanliness">Cleanliness</option>
+                <option value="Food Quality">Food Quality</option>
+                <option value="Noise Issues">Noise Issues</option>
+                <option value="Staff Behavior">Staff Behavior</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="complaint">Your Complaint:</label>
+            <textarea id="complaint" name="complaint" rows="5" required></textarea>
+
+            <button type="submit">Submit Complaint</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('complaintForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Get the form data
+            const category = document.getElementById('category').value;
+            const complaintText = document.getElementById('complaint').value;
+
+            // Create a complaint object
+            const complaint = {
+                category: category,
+                complaintText: complaintText,
+                date: new Date().toLocaleString()
+            };
+
+            // Get the complaints from localStorage or initialize an empty array
+            let complaints = JSON.parse(localStorage.getItem('complaints')) || [];
+
+            // Add the new complaint to the array
+            complaints.push(complaint);
+
+            // Save the updated complaints array back to localStorage
+            localStorage.setItem('complaints', JSON.stringify(complaints));
+
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+
+            // Reset the form fields
+            document.getElementById('complaintForm').reset();
+
+            // Hide success message and refresh the page after 2 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+                window.location.reload(); // Refresh the page
+            }, 2000);
+        });
+    </script>
+    
+</body>
+</html>

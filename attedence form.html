@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Attendance Form</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f7fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    /* Form Container */
+    .form-container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 900px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    /* Table Styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    td input, td select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    td input:focus, td select:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
+    /* Button Styling */
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .submit-btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Student Attendance Form</h2>
+  <form action="/submit_form" method="post">
+    <table>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Name</th>
+          <th>Admission No.</th>
+          <th>No. of Months</th>
+          <th>No. of Days Present</th>
+          <th>Total No. of Days</th>
+          <th>Mess Dues</th>
+          <th>Paid (Yes/No)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="number" name="sno[]" required></td>
+          <td><input type="text" name="name[]" required></td>
+          <td><input type="text" name="admission_no[]" required></td>
+          <td><input type="number" name="months[]" required></td>
+          <td><input type="number" name="days_present[]" required></td>
+          <td><input type="number" name="total_days[]" required></td>
+          <td><input type="number" name="mess_dues[]" required></td>
+          <td>
+            <select name="paid[]">
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </td>
+        </tr>
+        <!-- Additional rows can be added as needed -->
+      </tbody>
+    </table>
+  </form>
+</div>
+
+</body>
+</html>

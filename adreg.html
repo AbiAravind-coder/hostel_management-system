@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .register-container {
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #007BFF;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #007BFF;
+        }
+
+        .submit-button {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-message {
+            color: red;
+            font-size: 14px;
+        }
+
+        .form-message.success {
+            color: green;
+        }
+
+        .register-link {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="register-container">
+        <h2>Admin Registration</h2>
+        <form id="register-form" action="./php/ad.php" method="post">
+            <input type="text" id="adminid" class="input-field" placeholder="adminid" name="adminid" required>
+            <input type="email" id="email" class="input-field" placeholder="Email"  name="email"required >
+            <input type="password" id="password" class="input-field" placeholder="Password" required name="password">
+            <input type="password" id="confirm-password" class="input-field" placeholder="Confirm Password" required
+                name="confirmPassword">
+
+            <div class="form-message" id="form-message"></div>
+
+            <button type="submit" class="submit-button" name="submit">Register</button>
+        </form>
+
+        <div class="register-link">
+            <p>Already have an account? <a href="home1.html">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Form validation and submission logic
+        if (password !== confirmPassword) {
+            formMessage.textContent = "Passwords do not match!";
+            formMessage.classList.remove('success');
+            return;
+        }
+    </script>
+
+</body>
+
+</html>

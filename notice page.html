@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Notices</title>
+    <style>
+        /* ======== CSS Styles ======== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e9ecef;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        #searchBar {
+            width: 80%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        #noticeList {
+            list-style-type: none;
+            flex: 3;
+        }
+
+        #noticeList li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .date {
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+
+        #noticeList li a {
+            text-decoration: none;
+            color: #007bff;
+            padding: 5px 10px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        #noticeList li a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        aside {
+            flex: 1;
+            margin-left: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        aside h2 {
+            margin-bottom: 10px;
+        }
+
+        aside ul {
+            list-style-type: none;
+        }
+
+        aside ul li {
+            margin: 5px 0;
+        }
+
+        aside ul li a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        aside ul li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Hostel Notice Board</h1>
+        <input type="text" id="searchBar" placeholder="Search Notices...">
+    </header>
+
+    <main>
+        <div class="content">
+            <!-- Notice List -->
+            <ul id="noticeList">
+                <li>
+                    <div class="notice-content">
+                        <span>Notice 1: Hostel Rules Update</span>
+                        <span class="date">Uploaded on: 2023-10-01</span>
+                        <a href="notice1.pdf" download>Download</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="notice-content">
+                        <span>Notice 2: Upcoming Events</span>
+                        <span class="date">Uploaded on: 2023-10-05</span>
+                        <a href="notice2.pdf" download>Download</a>
+                    </div>
+                </li>
+                <li>
+                    <div class="notice-content">
+                        <span>Notice 3: Maintenance Schedule</span>
+                        <span class="date">Uploaded on: 2023-10-10</span>
+                        <a href="notice3.pdf" download>Download</a>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Important Links -->
+            <aside>
+                <h2>Important Links</h2>
+                <ul>
+                    <li><a href="department1.html">Department of Administration</a></li>
+                    <li><a href="department2.html">Department of Academics</a></li>
+                    <li><a href="department3.html">Department of Sports</a></li>
+                    <li><a href="department4.html">Department of Events</a></li>
+                </ul>
+            </aside>
+        </div>
+    </main>
+
+    <script>
+        // ======== JavaScript for Search Functionality ========
+        document.getElementById('searchBar').addEventListener('keyup', function() {
+            const filter = this.value.toLowerCase();
+            const notices = document.querySelectorAll('#noticeList li');
+
+            notices.forEach(function(notice) {
+                const text = notice.textContent.toLowerCase();
+                if (text.includes(filter)) {
+                    notice.style.display = '';
+                } else {
+                    notice.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
